@@ -22,6 +22,7 @@ import { MatOptionModule } from '@angular/material/core';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import {MatTabsModule} from '@angular/material/tabs';
 
 import { UserListComponent } from './users/user-list.component';
 import { HomeComponent } from './home/home.component';
@@ -30,9 +31,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { LayoutModule } from '@angular/cdk/layout';
 import { UserCardComponent } from './users/user-card.component';
 import { UserProfileComponent } from './users/user-profile.component';
-import { TodoCardComponent } from './todo-card/todo-card.component';
-import { TodoListComponent } from './todo-list/todo-list.component';
-import { TodoProfileComponent } from './todos/todo-profile/todo-profile.component';
+import { TodoListComponent } from './todos/todo-list.component';
+import { TodoService } from './todos/todo-service';
 
 const MATERIAL_MODULES: any[] = [
   MatListModule,
@@ -50,7 +50,8 @@ const MATERIAL_MODULES: any[] = [
   MatFormFieldModule,
   MatDividerModule,
   MatRadioModule,
-  MatSnackBarModule
+  MatSnackBarModule,
+  MatTabsModule
 ];
 
 @NgModule({
@@ -60,9 +61,7 @@ const MATERIAL_MODULES: any[] = [
     UserListComponent,
     UserCardComponent,
     UserProfileComponent,
-    TodoCardComponent,
-    TodoListComponent,
-    TodoProfileComponent,
+    TodoListComponent
   ],
   imports: [
     BrowserModule,
@@ -75,7 +74,8 @@ const MATERIAL_MODULES: any[] = [
     LayoutModule,
   ],
   providers: [
-    UserService
+    UserService,
+    TodoService
   ],
   bootstrap: [AppComponent]
 })

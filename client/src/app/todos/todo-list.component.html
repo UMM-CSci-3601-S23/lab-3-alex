@@ -1,1 +1,77 @@
-<p>todo-list works!</p>
+<div class="flex-row">
+  <div class="flex-1" fxFlex.gt-sm="80" fxFlexOffset.gt-sm="10">
+    <mat-card appearance="outlined" class="search-card">
+      <mat-card-title class="todo-list-title">Todos</mat-card-title>
+      <mat-card-content class="flex-col" >
+
+            <mat-list role="list">
+              <!-- Examples of filtering on the server -->
+              <mat-form-field class="input-field">
+                <mat-label>ID</mat-label>
+                <input matInput data-test="todo_idInput" type="string" placeholder="Filter by _id"
+                min="0" max="200" [(ngModel)]="_id" (input)="getTodosFromServer()">
+                <mat-hint>Filtered on server</mat-hint>
+              </mat-form-field>
+
+              <!-- Examples of filtering in angular -->
+              <mat-form-field class="input-field">
+                <mat-label>OWNER</mat-label>
+                <input matInput data-test="todoOwnerInput" placeholder="Filter by todo"
+                [(ngModel)]="owner" (input)="updateFilter()">
+                <mat-hint>Filtered on client</mat-hint>
+              </mat-form-field>
+
+              <mat-form-field class="input-field">
+                <mat-label>BODY</mat-label>
+                <input matInput data-test="todoBodyInput" placeholder="Filter by body"
+                [(ngModel)]="body" (input)="updateFilter()">
+                <mat-hint>Filtered on client</mat-hint>
+              </mat-form-field>
+
+              <!-- Examples of filtering on the server -->
+              <mat-form-field class="input-field">
+                <mat-label>STATUS</mat-label>
+                <input matInput data-test="todoStatusInput" type="boolean" placeholder="Filter by status"
+                min="0" max="200" [(ngModel)]="status" (input)="getTodosFromServer()">
+                <mat-hint>Filtered on server</mat-hint>
+              </mat-form-field>
+
+              <mat-form-field class="input-field">
+                <mat-label>CATEGORY</mat-label>
+                <input matInput data-test="todoCategoryInput" type="string" placeholder="Filter by category"
+                min="0" max="200" [(ngModel)]="category" (input)="getTodosFromServer()">
+                <mat-hint>Filtered on server</mat-hint>
+              </mat-form-field>
+        </mat-list>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+
+      <mat-card appearance="outlined" >
+        <mat-card-content>
+          <mat-list role="list">
+            <h3 mat-subheader>Todos</h3>
+            <a mat-list-item *ngFor="let todo of this.filteredTodos" [routerLink]="['/todos', todo._id]" class="todo-list-item">
+            <span matListItemTitle role="listitem">{{ todo.owner}}</span>
+            <span matListItemLine role="listitem">{{ todo._id }}</span>
+            <span matListItemLine role="listitem">{{ todo.status }}</span>
+            <span matListItemLine role="listitem">{{ todo.body }}</span>
+            <span matListItemLine role="listitem">{{ todo.category }}</span>
+            <br>
+            </a>
+          </mat-list>
+        </mat-card-content>
+      </mat-card>
+  </div>
+
+ <ng-template #todosError>
+    <div class="flex-1" fxFlex.gt-sm="80" fxFlexOffset.gt-sm="10" class="user-error">
+        <mat-error>
+          There was a problem loading the Todos. Possibly the server is down or perhaps there are network
+          issues.
+        </mat-error>
+        <mat-error>
+          Please wait a bit and try again or start the server.
+        </mat-error>
+      </div>
